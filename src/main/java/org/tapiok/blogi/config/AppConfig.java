@@ -4,19 +4,17 @@
  */
 package org.tapiok.blogi.config;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.tapiok.blogi.bean.BlogPost;
+
 
 /**
  *
  * @author Tapio
  */
 @Configuration
+@ComponentScan(basePackages = "org.tapiok.blogi")
 public class AppConfig {
     
-    public @Bean BlogPost blogPost() {
-        return new BlogPost();
-    }
     
 }
