@@ -21,10 +21,6 @@ http://www.springframework.org/schema/util/spring-util-3.1.xsd">
         <intercept-url pattern="/denied" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/welcome" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/users" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/fb/profile" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/fb/post" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/tw/profile" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/tw/post" access="hasRole('ROLE_USER')"/>
         <form-login login-page="/login"
                     authentication-failure-url="/login/failure"
                     default-target-url="/"/>
@@ -34,7 +30,6 @@ http://www.springframework.org/schema/util/spring-util-3.1.xsd">
                 logout-url="/logout"/>
     </http>
     <authentication-manager>
-        <!-- TODO: korjaa -->
         <authentication-provider user-service-ref="customUserDetailsService">
             <password-encoder hash="md5"/>
         </authentication-provider>
