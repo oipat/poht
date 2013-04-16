@@ -6,6 +6,8 @@ package org.tapiok.blogi.dao;
 
 import java.util.List;
 import org.tapiok.blogi.model.Post;
+import org.tapiok.blogi.model.Post;
+
 
 /**
  *

@@ -33,7 +33,7 @@ public class Post implements Serializable {
     private Long id;
     
     @ManyToOne
-    private User author;
+    private UserEntity author;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false)
@@ -67,11 +67,11 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public User getAuthor() {
+    public UserEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserEntity author) {
         this.author = author;
     }
 

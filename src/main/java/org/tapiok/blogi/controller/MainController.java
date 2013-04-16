@@ -9,23 +9,20 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author Tapio
  */
+
 @Controller
-final class MainController {
+@RequestMapping("/")
+public class MainController {
     
-    /**
-     * 
-     * @return View for default index page.
-     */
-    @RequestMapping(value = "*", method = RequestMethod.GET)
-    public final ModelAndView getAll() {
-        Logger.getLogger("org.tapiok.blogi.MainController").info("MainController.getAll()");
-        return new ModelAndView("index");
+    @RequestMapping(method = RequestMethod.GET)
+    public String index() {
+        Logger.getGlobal().log(Level.INFO, "@ MainController.index()");
+        return "index";
     }
+    
 }

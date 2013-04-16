@@ -5,6 +5,8 @@
 package org.tapiok.blogi.dao;
 
 import org.tapiok.blogi.model.UserEntity;
+import org.tapiok.blogi.model.UserEntity;
+
 
 /**
  *

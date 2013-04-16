@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.tapiok.blogi.model.UserEntity;
+import org.tapiok.blogi.model.UserEntity;
 
 /**
  *
@@ -22,11 +23,9 @@ public class UserDaoImpl implements UserDao {
     
     @Override
     public UserEntity findByUsername(String username) {
-        Logger.getLogger("org.tapiok.blogi.MainController").info("UserDaoImpl.findByUsername("+username+")");
         UserEntity findThis = new UserEntity();
         findThis.setUsername(username);
         UserEntity foundThis = entityManager.find(UserEntity.class, findThis);
-        Logger.getAnonymousLogger().info("found: "+ foundThis.toString());
         return foundThis;
     }
 

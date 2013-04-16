@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.tapiok.blogi.model.Post;
+import org.tapiok.blogi.model.Post;
+
 
 /**
  *

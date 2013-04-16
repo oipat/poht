@@ -1,4 +1,4 @@
-package service;
+package org.tapiok.blogi.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
