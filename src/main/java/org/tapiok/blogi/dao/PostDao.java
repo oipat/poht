@@ -15,8 +15,8 @@ import org.tapiok.blogi.model.Post;
  */
 public interface PostDao {
     
-    public void savePost(Post post);
-    public void rmPost(Post post);
-    public List<Post> retrievePost(Post post);
+    public void savePost(Post post) throws Exception ;
+    public void rmPost(Post post) throws Exception ;
+    public List<Post> retrievePost(Post post) throws Exception ;
     
 }

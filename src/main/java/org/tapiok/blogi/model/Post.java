@@ -24,87 +24,85 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "post")
 public class Post implements Serializable {
-    
+
     public Post() {
     }
-    
     @Id
     @GeneratedValue
     private Long id;
-    
     @ManyToOne
     private UserEntity author;
-    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false)
     private Date created;
-    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated", nullable = false)
     private Date updated;
-    
     @Column(name = "title")
     private String title;
-    
-    @Column(name="body", columnDefinition = "TEXT")
+    @Column(name = "body", columnDefinition = "TEXT")
     private String body;
-    
+
     @PrePersist
     private void onCreate() {
-    updated = created = new Date();
+	updated = created = new Date();
     }
 
     @PreUpdate
     private void onUpdate() {
-    updated = new Date();
+	updated = new Date();
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public UserEntity getAuthor() {
-        return author;
+	return author;
     }
 
     public void setAuthor(UserEntity author) {
-        this.author = author;
+	this.author = author;
     }
 
     public Date getCreated() {
-        return created;
+	return created;
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+	this.created = created;
     }
 
     public Date getUpdated() {
-        return updated;
+	return updated;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated;
+	this.updated = updated;
     }
 
     public String getTitle() {
-        return title;
+	return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+	this.title = title;
     }
 
     public String getBody() {
-        return body;
+	return body;
     }
 
     public void setBody(String body) {
-        this.body = body;
+	this.body = body;
     }
-    
+
+    @Override
+    public String toString() {
+	return "Post{" + "id=" + id + ", author=" + author + ", created=" + created + ", updated=" + updated + ", title=" + title + ", body=" + body + '}';
+    }
 }

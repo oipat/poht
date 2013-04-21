@@ -25,9 +25,9 @@ import org.tapiok.blogi.model.Post;
 @RequestMapping("/")
 public class MainController {
     
-  /*  @Autowired
+    @Autowired
     PostDao postDao;
-    */
+    
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
         Logger.getGlobal().log(Level.INFO, "@ MainController.index()");
@@ -39,7 +39,7 @@ public class MainController {
     
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public ModelAndView post(ModelMap mm) {
-        Logger.getGlobal().log(Level.INFO, "@ MainController.index()");
+        Logger.getGlobal().log(Level.INFO, "@ MainController.post()");
 	
 	mm.put("post", new Post());
 	ModelAndView mav = new ModelAndView("index");
@@ -49,9 +49,13 @@ public class MainController {
     
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public ModelAndView savePost(@ModelAttribute("post") Post postValues) {
+        Logger.getGlobal().log(Level.INFO, "@ MainController.savePost() values: " + postValues.toString());
 	ModelAndView mav = new ModelAndView();
-	
-	postDao.savePost(postValues);
+	try {
+	    postDao.savePost(postValues);
+	} catch (Exception ex) {
+	    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+	}
 	
 	mav.addObject("page", "saved");
 	return mav;

@@ -1,4 +1,4 @@
-package org.tapiok.blogi.service;
+package stash;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tapiok.blogi.dao.UserDao;
 import org.tapiok.blogi.model.UserEntity;
 
 /**

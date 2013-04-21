@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tapiok.blogi.dao;
+package stash;
 
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
