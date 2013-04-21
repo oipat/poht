@@ -12,15 +12,15 @@
  
     <authentication-manager>
         
-	  <authentication-provider>
+	  <!--<authentication-provider>
 	    <user-service>
 		<user name="asd" password="123" authorities="ROLE_USER" />
 	    </user-service>
-	  </authentication-provider>
-          <!--
+	  </authentication-provider>-->
+          
         <authentication-provider user-service-ref="customUserDetailsService">
-            <password-encoder hash="md5"/>
-        </authentication-provider>-->
+          <!--  <password-encoder hash="md5"/> -->
+        </authentication-provider>
     </authentication-manager>
  
 </beans:beans>
