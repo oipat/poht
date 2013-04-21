@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -65,6 +67,15 @@
             .topbar .btn {
                 border: 0;
             }
+	    
+	    h1 {
+		text-transform: capitalize;
+	    }
+	    
+	    textarea {
+		width: 400px;
+		height: 200px;
+	    }
 
         </style>
 
@@ -77,8 +88,9 @@
                 <div class="container">
                     <a class="brand" href="#">Blogi</a>
                     <ul class="nav">
-                        <li class="active"><a href="/">Home</a></li>
+                        <li class="active"><a href="./">Home</a></li>
                             <sec:authorize access="hasRole('ROLE_USER')">
+                            <li><a href="./post">Post</a></li>
                             <li><a href="j_spring_security_logout">Logout</a></li>
                             </sec:authorize>
                     </ul>
@@ -86,7 +98,7 @@
 
 
                     <sec:authorize access="isAnonymous()">
-                        <form action="/blogi/j_spring_security_check" class="pull-right" method="post">
+                        <form action="./j_spring_security_check" class="pull-right" method="post">
                             <input class="input-small" type="text" placeholder="Username" name="j_username">
                             <input class="input-small" type="password" placeholder="Password" name="j_password">
                             <button class="btn" type="submit">Sign in</button>
@@ -100,11 +112,12 @@
 
             <div class="content">
                 <div class="page-header">
-                    <h1>Page name <small>Supporting text or tagline</small></h1>
+                    <h1>${page} <small>Supporting text or tagline</small></h1>
                 </div>
                 <div class="row">
                     <div class="span10">
-                        <h2>Main content</h2>
+                        <h2></h2>
+			<jsp:include page="${page}.jsp" />
                     </div>
                     <div class="span4">
                         <h3>Secondary content</h3>
