@@ -53,5 +53,13 @@ public class UserEntity implements Serializable {
     public Long getId() {
         return id;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
     
 }

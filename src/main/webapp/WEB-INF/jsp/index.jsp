@@ -1,9 +1,17 @@
+<!--
+
+leiska kopioitu ja muokattu täältä:
+    http://webdesign.tutsplus.com/tutorials/complete-websites/twitter-bootstrap-101-introduction/
+
+
+-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <title>Bootstrap, from Twitter</title>
@@ -16,7 +24,7 @@
         <![endif]-->
 
         <!-- Le styles -->
-        <link href="resources/bootstrap.css" rel="stylesheet">
+        <link href="/blogi/resources/bootstrap.css" rel="stylesheet">
         <style type="text/css">
             /* Override some defaults */
             html, body {
@@ -53,29 +61,32 @@
             }
 
             /* Styles you shouldn't keep as they are for displaying this base example only */
-            .content .span10,
-            .content .span4 {
-                min-height: 500px;
-            }
             /* Give a quick and non-cross-browser friendly divider */
+            .content .span10, .span4 {
+                word-wrap: break-word;
+            }
             .content .span4 {
-                margin-left: 0;
                 padding-left: 19px;
+                margin-left: 0;
                 border-left: 1px solid #eee;
             }
 
             .topbar .btn {
                 border: 0;
             }
-	    
-	    h1 {
-		text-transform: capitalize;
-	    }
-	    
-	    textarea {
-		width: 400px;
-		height: 200px;
-	    }
+
+            h1 {
+                text-transform: capitalize;
+            }
+
+            textarea {
+                width: 400px;
+                height: 200px;
+            }
+
+            span.error {
+                color: red;
+            }
 
         </style>
 
@@ -88,17 +99,17 @@
                 <div class="container">
                     <a class="brand" href="#">Blogi</a>
                     <ul class="nav">
-                        <li class="active"><a href="./">Home</a></li>
+                        <li class="active"><a href="/blogi/">Home</a></li>
                             <sec:authorize access="hasRole('ROLE_USER')">
-                            <li><a href="./post">Post</a></li>
-                            <li><a href="j_spring_security_logout">Logout</a></li>
+                            <li><a href="/blogi/postform">Post</a></li>
+                            <li><a href="/blogi/j_spring_security_logout">Logout</a></li>
                             </sec:authorize>
                     </ul>
 
 
 
                     <sec:authorize access="isAnonymous()">
-                        <form action="./j_spring_security_check" class="pull-right" method="post">
+                        <form action="/blogi/j_spring_security_check" class="pull-right" method="post">
                             <input class="input-small" type="text" placeholder="Username" name="j_username">
                             <input class="input-small" type="password" placeholder="Password" name="j_password">
                             <button class="btn" type="submit">Sign in</button>
@@ -112,21 +123,30 @@
 
             <div class="content">
                 <div class="page-header">
-                    <h1>${page} <small>Supporting text or tagline</small></h1>
+                    <h1>${page} <small>blogi 0.1</small></h1>
                 </div>
                 <div class="row">
                     <div class="span10">
                         <h2></h2>
-			<jsp:include page="${page}.jsp" />
+                        <jsp:include page="${page}.jsp" />
                     </div>
                     <div class="span4">
-                        <h3>Secondary content</h3>
+                        <h3>
+                            <c:forEach items="${posts}" var="element"> 
+
+
+                                <a href="/blogi/post/${element.id}">${element.title}</a>
+
+                                </br>
+
+                            </c:forEach>
+                        </h3>
                     </div>
                 </div>
             </div>
 
             <footer>
-                <p>&copy; Company 2011</p>
+                <p> </p>
             </footer>
 
         </div> <!-- /container -->

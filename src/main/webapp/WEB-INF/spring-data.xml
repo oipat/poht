@@ -47,7 +47,6 @@
     <tx:annotation-driven transaction-manager="transactionManager"/> 
     
     
-    <bean id="postDao" class="org.tapiok.blogi.dao.PostDaoImpl" />
     <jpa:repositories base-package="org.tapiok.blogi.repo" />
     
 </beans>

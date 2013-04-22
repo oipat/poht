@@ -16,6 +16,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -38,6 +40,7 @@ public class Post implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated", nullable = false)
     private Date updated;
+    @NotNull @Size(min=2, max=20)
     @Column(name = "title")
     private String title;
     @Column(name = "body", columnDefinition = "TEXT")

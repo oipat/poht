@@ -7,17 +7,14 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
     <http use-expressions="true" auto-config="true">
-        <intercept-url pattern="/post/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/postform/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/postDelete/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/**" method="PUT" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/**" method="DELETE" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/**" method="POST" access="hasRole('ROLE_USER')" />
     </http>
  
     <authentication-manager>
-        
-        <!--<authentication-provider>
-          <user-service>
-              <user name="asd" password="123" authorities="ROLE_USER" />
-          </user-service>
-        </authentication-provider>-->
-          
         <authentication-provider user-service-ref="customUserDetailsService">
             <password-encoder hash="md5"/>
         </authentication-provider>
