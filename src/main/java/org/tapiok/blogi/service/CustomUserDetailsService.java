@@ -13,31 +13,32 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tapiok.blogi.model.UserEntity;
+import org.tapiok.blogi.repo.UserRepository;
 
 
 @Service
 @Transactional(readOnly = true)
 public class CustomUserDetailsService implements UserDetailsService {
 
-   /* @Autowired
-    private UserDao userRepository;*/
+    @Autowired
+    private UserRepository userRepository;
 
     
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-           // UserEntity domainUser = userRepository.findByUsername(username);
+            UserEntity domainUser = userRepository.findByUsername(username);
             boolean enabled = true;
             boolean accountNonExpired = true;
             boolean credentialsNonExpired = true;
             boolean accountNonLocked = true;
             return new User(
-                    username,
-                    "1233",
+                    domainUser.getUsername(),
+                    domainUser.getPassword(),
                     enabled,
                     accountNonExpired,
                     credentialsNonExpired,
                     accountNonLocked,
-                    getAuthorities(1));
+                    getAuthorities(domainUser.getUserRole().getUserRoleId()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

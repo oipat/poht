@@ -49,5 +49,9 @@ public class UserEntity implements Serializable {
     public UserRole getUserRole() {
         return userRole;
     }
+
+    public Long getId() {
+        return id;
+    }
     
 }

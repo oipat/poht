@@ -4,6 +4,7 @@
  */
 package org.tapiok.blogi.controller;
 
+import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.tapiok.blogi.dao.PostDao;
+import org.tapiok.blogi.dao.UserDao;
+import org.tapiok.blogi.repo.UserRepository;
 import org.tapiok.blogi.model.Post;
 
 /**
@@ -27,6 +30,8 @@ public class MainController {
     
     @Autowired
     PostDao postDao;
+    @Autowired
+    UserRepository userRepository;
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
@@ -48,10 +53,12 @@ public class MainController {
     }
     
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public ModelAndView savePost(@ModelAttribute("post") Post postValues) {
-        Logger.getGlobal().log(Level.INFO, "@ MainController.savePost() values: " + postValues.toString());
+    public ModelAndView savePost(@ModelAttribute("post") Post postValues, Principal principal) {
+        Logger.getGlobal().log(Level.INFO, "@ MainController.savePost() values: " + postValues.toString() + "\nuser: " + principal.getName());
 	ModelAndView mav = new ModelAndView();
 	try {
+            postValues.setAuthor(userRepository.findByUsername(principal.getName()));
+            Logger.getGlobal().log(Level.INFO, "found userid: " + userRepository.findByUsername(principal.getName()));
 	    postDao.savePost(postValues);
 	} catch (Exception ex) {
 	    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
