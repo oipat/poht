@@ -48,7 +48,7 @@ public class MainController {
     // Hakee 5 uusinta postia aina sivulle
     @ModelAttribute("posts")
     public List<Post> getPosts() {
-        PageRequest pageRequest = new PageRequest(0, 5, Sort.Direction.DESC, "created");
+        PageRequest pageRequest = new PageRequest(0, 20, Sort.Direction.DESC, "created");
         return postRepository.findAll(pageRequest).getContent();
     }
 

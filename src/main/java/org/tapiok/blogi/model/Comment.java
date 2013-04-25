@@ -27,7 +27,7 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Post post;
     @NotNull @Size(min=2, max=20)
     private String author;

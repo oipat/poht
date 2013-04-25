@@ -36,7 +36,7 @@ public class Post implements Serializable {
     private Long id;
     @ManyToOne
     private UserEntity author;
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Comment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false)

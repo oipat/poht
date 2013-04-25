@@ -15,7 +15,6 @@
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!--   <jpa:repositories base-package="org.tapiok.pohtmk2.dao" />-->
    
     <!--<bean id="propertyConfigurer"
     class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"

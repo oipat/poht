@@ -83,7 +83,7 @@ leiska kopioitu ja muokattu täältä:
                 width: 400px;
                 height: 200px;
             }
-            
+
             .comment {
                 width: 300px;
                 height: 100px;
@@ -102,13 +102,14 @@ leiska kopioitu ja muokattu täältä:
         <div class="topbar">
             <div class="fill">
                 <div class="container">
-                    <a class="brand" href="#">Blogi</a>
+                    <a class="brand" href="${pageContext.request.contextPath}/">Blogi</a>
                     <ul class="nav">
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                            <sec:authorize access="hasRole('ROLE_USER')">
+                        <!-- sec-Tageilla voidaan määritellä, että mitä elementtejä näkyy vain millekkin käyttäjäryhmälle -->
+                        <sec:authorize access="hasRole('ROLE_USER')">
                             <li><a href="${pageContext.request.contextPath}/postform">Post</a></li>
                             <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
-                            </sec:authorize>
+                        </sec:authorize>
                     </ul>
 
 
@@ -138,12 +139,8 @@ leiska kopioitu ja muokattu täältä:
                     <div class="span4">
                         <h3>
                             <c:forEach items="${posts}" var="element"> 
-
-
                                 <a href="${pageContext.request.contextPath}/post/${element.id}">${element.title}</a>
-
                                 </br>
-
                             </c:forEach>
                         </h3>
                     </div>
