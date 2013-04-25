@@ -9,8 +9,10 @@
     <http use-expressions="true" auto-config="true">
         <intercept-url pattern="/postform/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/postDelete/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/commentDelete/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/**" method="PUT" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/**" method="DELETE" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/comment/*" method="POST" access="permitAll" />
         <intercept-url pattern="/**" method="POST" access="hasRole('ROLE_USER')" />
     </http>
  

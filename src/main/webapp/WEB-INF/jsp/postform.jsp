@@ -2,7 +2,7 @@
 
 <h1>Le post</h1>
 
-<form:form cssClass="form-stacked" commandName="post" method="${method}" action="/post/${post.id}">
+<form:form cssClass="form-stacked" commandName="post" method="${method}" action="${pageContext.request.contextPath}/post/${post.id}">
 
     <form:label path="title">Title</form:label>
     <form:input path="title" />

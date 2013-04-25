@@ -26,8 +26,8 @@
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="com.mysql.jdbc.Driver"
           p:url="jdbc:mysql://localhost:3306/blogi"
-          p:username="root"
-          p:password="" />
+          p:username="blogitest"
+          p:password="kurapassu" />
 
     
     <!-- Declare a JPA entityManagerFactory -->

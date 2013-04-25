@@ -14,7 +14,7 @@ leiska kopioitu ja muokattu täältä:
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap, from Twitter</title>
+        <title>Blogi 0.1</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -24,7 +24,7 @@ leiska kopioitu ja muokattu täältä:
         <![endif]-->
 
         <!-- Le styles -->
-        <link href="/blogi/resources/bootstrap.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bootstrap.css" rel="stylesheet">
         <style type="text/css">
             /* Override some defaults */
             html, body {
@@ -83,6 +83,11 @@ leiska kopioitu ja muokattu täältä:
                 width: 400px;
                 height: 200px;
             }
+            
+            .comment {
+                width: 300px;
+                height: 100px;
+            }
 
             span.error {
                 color: red;
@@ -99,17 +104,17 @@ leiska kopioitu ja muokattu täältä:
                 <div class="container">
                     <a class="brand" href="#">Blogi</a>
                     <ul class="nav">
-                        <li class="active"><a href="/blogi/">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                             <sec:authorize access="hasRole('ROLE_USER')">
-                            <li><a href="/blogi/postform">Post</a></li>
-                            <li><a href="/blogi/j_spring_security_logout">Logout</a></li>
+                            <li><a href="${pageContext.request.contextPath}/postform">Post</a></li>
+                            <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
                             </sec:authorize>
                     </ul>
 
 
 
                     <sec:authorize access="isAnonymous()">
-                        <form action="/blogi/j_spring_security_check" class="pull-right" method="post">
+                        <form action="${pageContext.request.contextPath}/j_spring_security_check" class="pull-right" method="post">
                             <input class="input-small" type="text" placeholder="Username" name="j_username">
                             <input class="input-small" type="password" placeholder="Password" name="j_password">
                             <button class="btn" type="submit">Sign in</button>
@@ -135,7 +140,7 @@ leiska kopioitu ja muokattu täältä:
                             <c:forEach items="${posts}" var="element"> 
 
 
-                                <a href="/blogi/post/${element.id}">${element.title}</a>
+                                <a href="${pageContext.request.contextPath}/post/${element.id}">${element.title}</a>
 
                                 </br>
 
