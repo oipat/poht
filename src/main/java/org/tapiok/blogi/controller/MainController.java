@@ -128,8 +128,15 @@ public class MainController {
 
     // Postin muokkaus
     @RequestMapping(value = "/post/{id}", method = RequestMethod.PUT)
-    public ModelAndView editPost(@PathVariable Long id, @ModelAttribute("post") @Valid Post postValues) {
+    public ModelAndView editPost(@PathVariable Long id, @ModelAttribute("post") @Valid Post postValues, BindingResult br) {
 
+        if (br.hasErrors()) {
+            ModelAndView mav = new ModelAndView("index");
+            mav.addObject("page", "postform");
+            mav.addObject("method", "put");
+            return mav;
+        }
+        
         Post thePost = postRepository.findById(id);
         thePost.setBody(postValues.getBody().replace("\n", "<br>\n"));
         thePost.setTitle(postValues.getTitle());
@@ -205,6 +212,7 @@ public class MainController {
         if (br.hasErrors()) {
             ModelAndView mav = new ModelAndView("index");
             mav.addObject("page", "postform");
+            mav.addObject("method", "post");
             return mav;
         }
 
