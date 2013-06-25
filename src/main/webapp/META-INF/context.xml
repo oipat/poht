@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/blogi"/>
+<Context antiJARLocking="true" path="/blogi">
+    <ResourceLink name="jdbc/blogidb"
+                  global="jdbc/blogidb"
+                  type="javax.sql.DataSource"/>
+</Context>
