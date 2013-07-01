@@ -9,7 +9,18 @@
                             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
 >
      
-    <import resource="classpath:applicationContext-web.xml" />
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler/>
 
+    <context:component-scan base-package="org.tapiok.blogi.controller" />
     
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/jsp/"/>
+	<property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 </beans>
