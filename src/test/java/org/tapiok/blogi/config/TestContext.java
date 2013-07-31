@@ -17,7 +17,7 @@ import org.tapiok.blogi.repo.UserRepository;
  * @author Tapio
  */
 @Configuration
-@ImportResource("classpath:applicationContext-web.xml")
+@ImportResource("classpath:blogi-webContext.xml")
 public class TestContext {
 
     @Bean

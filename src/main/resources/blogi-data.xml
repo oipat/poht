@@ -17,23 +17,10 @@
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/jee
         http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
-
-   
-    <!--<bean id="propertyConfigurer"
-    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:location="WEB-INF/jdbc.properties" />-->
    
     <jee:jndi-lookup id="myDataSource"
                      jndi-name="jdbc/blogidb"
                      expected-type="javax.sql.DataSource" />
-    
-    <!--<bean id="myDataSource"
-    class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-    p:driverClassName="com.mysql.jdbc.Driver"
-    p:url="jdbc:mysql://localhost:3306/blogi"
-    p:username="blogitest"
-    p:password="kurapassu" />-->
-
     
     <!-- Declare a JPA entityManagerFactory -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
