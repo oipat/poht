@@ -4,10 +4,10 @@
  */
 package org.tapiok.blogi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -28,6 +28,7 @@ public class Comment implements Serializable {
     @GeneratedValue
     private Long id;
     @ManyToOne
+    @JsonIgnore
     private Post post;
     @NotNull @Size(min=2, max=20)
     private String author;

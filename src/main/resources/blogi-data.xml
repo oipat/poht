@@ -23,18 +23,24 @@
                      expected-type="javax.sql.DataSource" />
     
     <!-- Declare a JPA entityManagerFactory -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:persistenceXmlLocation="classpath*:persistence.xml"
-          p:persistenceUnitName="blogiPU"
-          p:dataSource-ref="myDataSource"
-          p:jpaVendorAdapter-ref="hibernateVendor"/>
+    <bean id="entityManagerFactory"
+       class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="myDataSource"/>
+        <property name="persistenceXmlLocation" value="classpath*:persistence.xml" />
+        <property name="jpaVendorAdapter" ref="hibernateVendorAdapter"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+            </props>
+        </property>
+    </bean>
     
     <!-- Specify our ORM vendor -->
-    <bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+    <bean id="hibernateVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 
     <!-- Declare a transaction manager-->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
+          p:entityManagerFactory-ref="entityManagerFactory" />
     
     <tx:annotation-driven transaction-manager="transactionManager"/> 
     

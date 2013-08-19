@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
 import org.tapiok.blogi.repo.UserRepository;
+import org.tapiok.blogi.service.PostService;
 
 /**
  *
@@ -33,5 +34,10 @@ public class TestContext {
     @Bean
     public UserRepository userRepository() {
         return Mockito.mock(UserRepository.class);
+    }
+    
+    @Bean
+    public PostService postService() {
+        return Mockito.mock(PostService.class);
     }
 }
