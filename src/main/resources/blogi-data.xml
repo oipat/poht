@@ -26,7 +26,7 @@
     <bean id="entityManagerFactory"
        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="myDataSource"/>
-        <property name="persistenceXmlLocation" value="classpath*:persistence.xml" />
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
         <property name="jpaVendorAdapter" ref="hibernateVendorAdapter"/>
         <property name="jpaProperties">
             <props>
@@ -43,7 +43,6 @@
           p:entityManagerFactory-ref="entityManagerFactory" />
     
     <tx:annotation-driven transaction-manager="transactionManager"/> 
-    
     
     <jpa:repositories base-package="org.tapiok.blogi.repo" />
     

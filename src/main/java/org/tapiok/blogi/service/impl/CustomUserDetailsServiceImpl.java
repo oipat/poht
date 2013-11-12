@@ -25,7 +25,7 @@ import org.tapiok.blogi.repo.UserRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;

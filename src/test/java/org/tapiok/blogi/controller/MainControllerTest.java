@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
@@ -37,20 +38,24 @@ import org.tapiok.blogi.service.PostService;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
 public class MainControllerTest {
 
     private MockMvc mockMvc;
+    
     @Autowired
     private UserRepository userRepositoryMock;
-    @Autowired
+    
+    @Mock
     private PostRepository postRepositoryMock;
-    @Autowired
+    
+    @Mock
     private CommentRepository commentRepositoryMock;
-    @Autowired
+    
+    @Mock
     PostService postService;
+    
     @Autowired
     private WebApplicationContext webApplicationContext;
 
