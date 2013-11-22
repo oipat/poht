@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.tapiok.blogi.service.impl;
 
 import java.util.ArrayList;
@@ -22,11 +18,15 @@ import org.tapiok.blogi.service.PostService;
 @Service
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     PostRepository postRepository;
     
-    @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    public PostServiceImpl(PostRepository postRepository, CommentRepository commentRepository) {
+        this.postRepository = postRepository;
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)

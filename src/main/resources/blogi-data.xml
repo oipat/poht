@@ -18,21 +18,14 @@
         http://www.springframework.org/schema/jee
         http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
    
-    <jee:jndi-lookup id="myDataSource"
+    <!--<jee:jndi-lookup id="myDataSource"
                      jndi-name="jdbc/blogidb"
-                     expected-type="javax.sql.DataSource" />
+                     expected-type="javax.sql.DataSource" />-->
     
     <!-- Declare a JPA entityManagerFactory -->
     <bean id="entityManagerFactory"
        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="myDataSource"/>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-        <property name="jpaVendorAdapter" ref="hibernateVendorAdapter"/>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
-            </props>
-        </property>
+	<property name="persistenceUnitName" value="blogiPU" />
     </bean>
     
     <!-- Specify our ORM vendor -->

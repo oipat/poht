@@ -9,14 +9,10 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -28,12 +24,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.tapiok.blogi.config.TestContext;
 import org.tapiok.blogi.model.Post;
-import org.tapiok.blogi.model.UserEntity;
 import org.tapiok.blogi.service.PostService;
 import org.tapiok.blogi.util.TestUtil;
 
@@ -44,7 +38,7 @@ public class JsonPostRestControllerTest {
 
     private MockMvc mockMvc;
     
-    @Mock
+    @Autowired
     private PostService postServiceMock;
 
     @Autowired

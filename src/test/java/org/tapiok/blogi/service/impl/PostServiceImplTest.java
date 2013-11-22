@@ -7,24 +7,17 @@
 package org.tapiok.blogi.service.impl;
 
 import org.junit.Assert;
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.tapiok.blogi.config.TestContext;
 import org.tapiok.blogi.model.Post;
+import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
 import org.tapiok.blogi.service.PostService;
 import org.tapiok.blogi.util.TestUtil;
@@ -33,20 +26,22 @@ import org.tapiok.blogi.util.TestUtil;
  *
  * @author Tapio
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:blogi-appContext.xml"})
-@Profile("test")
-@WebAppConfiguration
+
 public class PostServiceImplTest {
     
     @Mock
     PostRepository postRepository;
     
-    @Autowired
+    @Mock
+    CommentRepository commentRepository;
+    
     PostService postService;
     
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        postService = new PostServiceImpl(postRepository, commentRepository);
+        
         Mockito.reset(postRepository);
     }
     
@@ -66,7 +61,6 @@ public class PostServiceImplTest {
         Post returnedPost = postService.addPost(testPost);
         Assert.assertNotNull(returnedPost);
         Assert.assertEquals(testPost, returnedPost);
-        
     }
     
 }

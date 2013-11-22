@@ -16,6 +16,8 @@
         <intercept-url pattern="/**" method="POST" access="hasRole('ROLE_USER')" />
     </http>
  
+    <beans:bean id="customUserDetailsService" class="org.tapiok.blogi.service.impl.CustomUserDetailsServiceImpl" />
+ 
     <authentication-manager>
         <authentication-provider user-service-ref="customUserDetailsService">
             <password-encoder hash="md5"/>
