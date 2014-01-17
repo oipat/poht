@@ -11,17 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tapiok.blogi.model.Post;
 import org.tapiok.blogi.service.PostService;
 
-/**
- *
- * @author Tapio
- */
+
 @RequestMapping(produces = "application/json;charset=UTF-8")
 @Controller
 public class JsonPostRestController {
     
     @Autowired
     PostService postService;
-    
     
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     @ResponseBody

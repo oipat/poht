@@ -24,8 +24,8 @@ import javax.validation.constraints.Size;
 @Entity
 public class Post implements Serializable {
 
-    public Post() {
-    }
+	private static final long serialVersionUID = -2372401650838806205L;
+
     @Id
     @GeneratedValue
     private Long id;

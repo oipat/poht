@@ -11,10 +11,7 @@ import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
 import org.tapiok.blogi.service.PostService;
 
-/**
- *
- * @author Tapio
- */
+
 @Service
 public class PostServiceImpl implements PostService {
 

@@ -8,10 +8,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- *
- * @author Tapio
- */
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("org.tapiok.blogi.repo")

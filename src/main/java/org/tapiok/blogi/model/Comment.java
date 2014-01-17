@@ -13,14 +13,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Tapio
- */
+
 @Entity
 public class Comment implements Serializable {
     
-    @Id
+	private static final long serialVersionUID = 6132154323678280845L;
+	
+	@Id
     @GeneratedValue
     private Long id;
     @ManyToOne

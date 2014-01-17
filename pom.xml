@@ -15,6 +15,7 @@
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
         <spring.version>4.0.0.RELEASE</spring.version>
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
+        <org.eclipse.jetty.version>8.1.8.v20121106</org.eclipse.jetty.version>
     </properties>
     
     <dependencies>

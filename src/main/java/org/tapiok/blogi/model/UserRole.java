@@ -14,13 +14,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class UserRole implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = -8346255607938415127L;
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
     private UserEntity userEntity;
     private Integer userRoleId;
-
 
     public Integer getUserRoleId() {
         return userRoleId;

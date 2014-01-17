@@ -8,10 +8,7 @@ package org.tapiok.blogi.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- *
- * @author Tapio
- */
+
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

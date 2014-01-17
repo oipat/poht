@@ -19,10 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-/**
- *
- * @author Tapio
- */
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"org.tapiok.blogi.controller"})

@@ -15,13 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tapiok.blogi.model.UserEntity;
 import org.tapiok.blogi.repo.UserRepository;
 
-/*
- * Beani hakee userRepositorysta käyttäjiä ja niiden rooleja sekä alustaa niistä Spring Security -käyttäjiä.
- * 
- * Käytetty pohjana http://krams915.blogspot.fi/2012/01/spring-security-31-implement_1244.html sivulta löytyvää tutoriaalia
- * 
- * 
- */
 
 @Service
 @Transactional(readOnly = true)
