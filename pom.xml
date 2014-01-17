@@ -16,6 +16,7 @@
         <spring.version>4.0.0.RELEASE</spring.version>
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
     </properties>
+    
     <dependencies>
         
         <!-- Spring -->
@@ -194,12 +195,4 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-            <id>eclipselink</id>
-            <layout>default</layout>
-            <name>Repository for library EclipseLink (JPA 2.1)</name>
-        </repository>
-    </repositories>
 </project>
