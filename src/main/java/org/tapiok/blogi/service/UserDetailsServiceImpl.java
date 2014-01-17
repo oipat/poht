@@ -1,4 +1,4 @@
-package org.tapiok.blogi.service.impl;
+package org.tapiok.blogi.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +18,7 @@ import org.tapiok.blogi.repo.UserRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class CustomUserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;

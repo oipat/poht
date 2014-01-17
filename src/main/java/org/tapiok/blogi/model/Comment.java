@@ -79,5 +79,11 @@ public class Comment implements Serializable {
     public void setCreated(Date created) {
         this.created = created;
     }
+
+	@Override
+	public String toString() {
+		return "Comment {id=" + id + ", post=" + post + ", author=" + author
+				+ ", body=" + body + ", created=" + created + "}";
+	}
     
 }

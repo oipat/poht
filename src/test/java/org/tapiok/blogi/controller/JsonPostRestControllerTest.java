@@ -57,7 +57,7 @@ public class JsonPostRestControllerTest {
 
     @Test
     public void testGetAllPosts() throws Exception {
-        when(postServiceMock.findPosts(any(String.class)))
+        when(postServiceMock.getAll())
                 .thenReturn(TestUtil.getDummyPosts());
 
         mockMvc.perform(get("/posts")).andExpect(status().isOk());
@@ -66,7 +66,7 @@ public class JsonPostRestControllerTest {
 
     @Test
     public void testPostNewPost() throws Exception {
-        when(postServiceMock.addPost(any(Post.class)))
+        when(postServiceMock.savePost(any(Post.class)))
                 // return same Post instance as the given argument
                 .thenAnswer(new Answer<Post>() {
                     @Override

@@ -22,14 +22,14 @@ public class JsonPostRestController {
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     @ResponseBody
     public List<Post> getAllPosts() {
-        List<Post> posts = postService.findPosts("");
+        List<Post> posts = postService.getAll();
         return posts;
     }
     
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
     @ResponseBody
     public Post postPost(@Valid @RequestBody Post post) {
-        return postService.addPost(post);
+        return postService.savePost(post);
     }
     
 }
