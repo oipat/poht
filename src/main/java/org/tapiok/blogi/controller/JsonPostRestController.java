@@ -15,7 +15,7 @@ import org.tapiok.blogi.service.PostService;
  *
  * @author Tapio
  */
-@RequestMapping(value = "/posts**", produces = "application/json;charset=UTF-8")
+@RequestMapping(produces = "application/json;charset=UTF-8")
 @Controller
 public class JsonPostRestController {
     

@@ -20,17 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.tapiok.blogi.model.Comment;
-import org.tapiok.blogi.repo.UserRepository;
 import org.tapiok.blogi.model.Post;
 import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
+import org.tapiok.blogi.repo.UserRepository;
 
 /**
  *
  * @author Tapio
  */
 @Controller
-@RequestMapping("/")
 public class MainController {
 
     // Dao luokat
@@ -48,8 +47,7 @@ public class MainController {
         return postRepository.findAll(pageRequest).getContent();
     }
 
-    // etusivu
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         Logger.getLogger("DebugInfoLogger").log(Level.INFO, "@ MainController.index()");
 

@@ -59,6 +59,7 @@ public class PostServiceImplTest {
                 });
         
         Post returnedPost = postService.addPost(testPost);
+        verify(postRepository, times(1)).save(any(Post.class));
         Assert.assertNotNull(returnedPost);
         Assert.assertEquals(testPost, returnedPost);
     }
