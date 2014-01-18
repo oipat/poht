@@ -15,11 +15,6 @@ import org.tapiok.blogi.service.PostService;
 public class TestContext {
 
     @Bean
-    public PostRepository postRepository() {
-        return Mockito.mock(PostRepository.class);
-    }
-
-    @Bean
     public CommentRepository commentRepository() {
         return Mockito.mock(CommentRepository.class);
     }

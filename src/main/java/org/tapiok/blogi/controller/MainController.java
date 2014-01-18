@@ -10,8 +10,6 @@ import org.owasp.html.PolicyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -75,9 +73,8 @@ public class MainController {
 
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
 	public ModelAndView showPost(@PathVariable Long id) {
-
+		
 		Post post = postService.findById(id);
-		post.setComments(commentRepository.findByPostId(id));
 		logger.debug("Showing post: {}", post);
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("page", "showPost");
@@ -95,10 +92,7 @@ public class MainController {
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
 	public ModelAndView deletePost(@PathVariable Long id) {
 		postService.deleteById(id);
-		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("page", "message");
-		mav.addObject("message", "Post deleted!");
-
+		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 
@@ -120,39 +114,38 @@ public class MainController {
 		savedPost.setTitle(savedPost.getTitle());
 		postService.savePost(savedPost);
 
-		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("page", "message");
-		mav.addObject("message", "Post edited!");
+		ModelAndView mav = new ModelAndView("redirect:/post/" + id);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/comment/{postId}", method = RequestMethod.POST)
-	public ModelAndView saveComment(@PathVariable("postId") Long id,
+	public ModelAndView saveComment(@PathVariable("postId") Long postId,
 			@ModelAttribute("comment") @Valid Comment commentValues,
 			BindingResult br) {
+		Post savedPost = postService.findById(postId);
+		
 		if (br.hasErrors()) {
 			for (ObjectError oe : br.getAllErrors()) {
 				logger.debug(oe.toString());
 			}
 			ModelAndView mav = new ModelAndView("index");
-			mav.addObject("page", "message");
-			mav.addObject("message", "Error saving comment..");
+			mav.addObject("postToShow", savedPost);
+			mav.addObject("page", "showPost");
+			mav.addObject("method", "post");
 			return mav;
 		}
 
-		ModelAndView mav = new ModelAndView("index");
 
 		PolicyFactory policy = new HtmlPolicyBuilder().toFactory();
-		Post savedPost = postService.findById(id);
-		commentValues.setPost(savedPost);
+		savedPost.getComments().add(commentValues);
 		commentValues.setAuthor(policy.sanitize(commentValues.getAuthor()));
 		commentValues.setBody(policy.sanitize(commentValues.getBody().replace(
 				"\n", "<br>\n")));
 		commentRepository.saveAndFlush(commentValues);
+		postService.savePost(savedPost);
 
-		mav.addObject("page", "message");
-		mav.addObject("message", "Comment saved!");
+		ModelAndView mav = new ModelAndView("redirect:/post/" + postId);
 		return mav;
 	}
 
@@ -166,9 +159,7 @@ public class MainController {
 	public ModelAndView deleteComment(@PathVariable("commentId") Long commentId) {
 		commentRepository.delete(commentId);
 
-		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("page", "message");
-		mav.addObject("message", "Comment deleted!");
+		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 
@@ -186,17 +177,15 @@ public class MainController {
 			return mav;
 		}
 
-		ModelAndView mav = new ModelAndView("index");
 
 		post.setAuthor(userRepository.findByUsername(principal.getName()));
 		logger.info("Found user: {}",
 				userRepository.findByUsername(principal.getName())
 						.getUsername());
 		post.setBody(post.getBody().replace("\n", "<br>\n"));
-		postService.savePost(post);
+		Post savedPost = postService.savePost(post);
 
-		mav.addObject("page", "message");
-		mav.addObject("message", "Post saved!");
+		ModelAndView mav = new ModelAndView("redirect:/post/" + savedPost.getId());
 		return mav;
 	}
 }

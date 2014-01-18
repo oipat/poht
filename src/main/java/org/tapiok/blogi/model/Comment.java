@@ -22,9 +22,6 @@ public class Comment implements Serializable {
 	@Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
-    @JsonIgnore
-    private Post post;
     @NotNull @Size(min=2, max=20)
     private String author;
     @NotNull @Size(min=2, max=2000)
@@ -46,14 +43,6 @@ public class Comment implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
     }
 
     public String getAuthor() {
@@ -82,7 +71,7 @@ public class Comment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comment {id=" + id + ", post=" + post + ", author=" + author
+		return "Comment {id=" + id + ", author=" + author
 				+ ", body=" + body + ", created=" + created + "}";
 	}
     
