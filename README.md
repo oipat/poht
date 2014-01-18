@@ -1,6 +1,6 @@
 a Simple blog
 ====
-Initially an exercise project for school: a simple blog. Now I use it to test it to test stuff and iterate the application structure to match best practices of Spring and web.
+Initially an exercise project for school: a simple blog. Now I use it to test Spring/Web stuff.
 
 Some technologies used:
 * Java EE Web
