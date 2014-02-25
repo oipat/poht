@@ -53,12 +53,12 @@
         <form:label path="author">Name</form:label>
         <form:input path="author" />
         <form:errors path="author" cssClass="error" />
-        <!-- laiskana br, parantelun varaa -->
         <br /><br />
         <form:errors path="body" cssClass="error"/>
         <form:textarea cssClass="comment" path="body" />
 
         <br /><br />
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Submit"/>
     </form:form>
 </div>

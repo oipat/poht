@@ -1,4 +1,4 @@
-package org.tapiok.blogi.service.impl;
+package org.tapiok.blogi.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,24 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tapiok.blogi.model.UserEntity;
 import org.tapiok.blogi.repo.UserRepository;
 
-/*
- * Beani hakee userRepositorysta käyttäjiä ja niiden rooleja sekä alustaa niistä Spring Security -käyttäjiä.
- * 
- * Käytetty pohjana http://krams915.blogspot.fi/2012/01/spring-security-31-implement_1244.html sivulta löytyvää tutoriaalia
- * 
- * 
- */
 
 @Service
 @Transactional(readOnly = true)
-public class CustomUserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
     
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
             UserEntity domainUser = userRepository.findByUsername(username);
             boolean enabled = true;
             boolean accountNonExpired = true;
@@ -46,9 +38,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
                     credentialsNonExpired,
                     accountNonLocked,
                     getAuthorities(domainUser.getUserRole().getUserRoleId()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(Integer role) {
@@ -57,7 +46,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
     }
 
     public List<String> getRoles(Integer role) {
-        List<String> roles = new ArrayList<String>();
+        List<String> roles = new ArrayList<>();
         if (role.intValue() == 1) {
             roles.add("ROLE_USER");
         }
@@ -65,7 +54,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
     }
 
     public static List<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }

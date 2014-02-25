@@ -3,24 +3,16 @@ package org.tapiok.blogi.config;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Import;
 import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
 import org.tapiok.blogi.repo.UserRepository;
 import org.tapiok.blogi.service.PostService;
 
-/**
- *
- * @author Tapio
- */
-@Configuration
-@ImportResource("classpath:blogi-webContext.xml")
-public class TestContext {
 
-    @Bean
-    public PostRepository postRepository() {
-        return Mockito.mock(PostRepository.class);
-    }
+@Configuration
+@Import(WebConfig.class)
+public class TestContext {
 
     @Bean
     public CommentRepository commentRepository() {

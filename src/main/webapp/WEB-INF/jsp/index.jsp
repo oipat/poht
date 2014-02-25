@@ -105,19 +105,19 @@ leiska kopioitu ja muokattu täältä:
                     <a class="brand" href="${pageContext.request.contextPath}/">Blogi</a>
                     <ul class="nav">
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                        <!-- sec-Tageilla voidaan määritellä, että mitä elementtejä näkyy vain millekkin käyttäjäryhmälle -->
-                        <sec:authorize access="hasRole('ROLE_USER')">
+                            <sec:authorize access="hasRole('ROLE_USER')">
                             <li><a href="${pageContext.request.contextPath}/postform">Post</a></li>
-                            <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
-                        </sec:authorize>
+                            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                            </sec:authorize>
                     </ul>
 
 
 
                     <sec:authorize access="isAnonymous()">
-                        <form action="${pageContext.request.contextPath}/j_spring_security_check" class="pull-right" method="post">
-                            <input class="input-small" type="text" placeholder="Username" name="j_username">
-                            <input class="input-small" type="password" placeholder="Password" name="j_password">
+                        <form action="${pageContext.request.contextPath}/login" class="pull-right" method="post">
+                            <input class="input-small" type="text" placeholder="Username" name="username">
+                            <input class="input-small" type="password" placeholder="Password" name="password">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <button class="btn" type="submit">Sign in</button>
                         </form>
                     </sec:authorize>

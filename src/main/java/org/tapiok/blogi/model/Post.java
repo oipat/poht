@@ -3,9 +3,11 @@ package org.tapiok.blogi.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -18,102 +20,114 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * 
  * @author Tapio
  */
 @Entity
 public class Post implements Serializable {
 
-    public Post() {
-    }
-    @Id
-    @GeneratedValue
-    private Long id;
-    @ManyToOne
-    private UserEntity author;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<Comment> comments;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created", nullable = false)
-    private Date created;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
-    private Date updated;
-    @NotNull @Size(min=2, max=20)
-    @Column(name = "title")
-    private String title;
-    @NotNull @Size(min=2, max=20000)
-    @Column(name = "body", columnDefinition = "TEXT")
-    private String body;
+	private static final long serialVersionUID = -2372401650838806205L;
 
-    @PrePersist
-    private void onCreate() {
-	updated = created = new Date();
-    }
+	@Id
+	@GeneratedValue
+	private Long id;
+	@ManyToOne
+	private UserEntity author;
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	private List<Comment> comments;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created", nullable = false)
+	private Date created;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated", nullable = false)
+	private Date updated;
+	@NotNull
+	@Size(min = 2, max = 20)
+	@Column(name = "title")
+	private String title;
+	@NotNull
+	@Size(min = 2, max = 20000)
+	@Column(name = "body", columnDefinition = "TEXT")
+	private String body;
 
-    @PreUpdate
-    private void onUpdate() {
-	updated = new Date();
-    }
+	@PrePersist
+	private void onCreate() {
+		updated = created = new Date();
+	}
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+	@PreUpdate
+	private void onUpdate() {
+		updated = new Date();
+	}
 
-    public void setComments(List<Comment> comment) {
-        this.comments = comment;
-    }
-    
-    public Long getId() {
-	return id;
-    }
+	public List<Comment> getComments() {
+		return comments;
+	}
 
-    public void setId(Long id) {
-	this.id = id;
-    }
+	public void setComments(List<Comment> comment) {
+		this.comments = comment;
+	}
 
-    public UserEntity getAuthor() {
-	return author;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setAuthor(UserEntity author) {
-	this.author = author;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Date getCreated() {
-	return created;
-    }
+	public UserEntity getAuthor() {
+		return author;
+	}
 
-    public void setCreated(Date created) {
-	this.created = created;
-    }
+	public void setAuthor(UserEntity author) {
+		this.author = author;
+	}
 
-    public Date getUpdated() {
-	return updated;
-    }
+	public Date getCreated() {
+		return created;
+	}
 
-    public void setUpdated(Date updated) {
-	this.updated = updated;
-    }
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 
-    public String getTitle() {
-	return title;
-    }
+	public Date getUpdated() {
+		return updated;
+	}
 
-    public void setTitle(String title) {
-	this.title = title;
-    }
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 
-    public String getBody() {
-	return body;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setBody(String body) {
-	this.body = body;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    @Override
-    public String toString() {
-	return "Post{" + "id=" + id + ", author=" + author + ", created=" + created + ", updated=" + updated + ", title=" + title + ", body=" + body + '}';
-    }
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Post{" + "id=" + id + ", author=" + author + ", created="
+				+ created + ", updated=" + updated + ", title=" + title
+				+ ", body=" + body + ", comments=[");
+		if (comments != null) {
+			for (Comment comment : comments) {
+				sb.append(comment.toString());
+			}
+		}
+		sb.append("]}");
+		return sb.toString();
+	}
 }

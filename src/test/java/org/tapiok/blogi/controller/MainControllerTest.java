@@ -42,26 +42,15 @@ public class MainControllerTest {
     private MockMvc mockMvc;
     
     @Autowired
-    private UserRepository userRepositoryMock;
-    
-    @Autowired
-    private PostRepository postRepositoryMock;
-    
-    @Autowired
-    private CommentRepository commentRepositoryMock;
-    
-    @Autowired
-    PostService postService;
+    PostService postServiceMock;
     
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Before
     public void setUp() {
-        Mockito.reset(userRepositoryMock);
-        Mockito.reset(postRepositoryMock);
-        Mockito.reset(commentRepositoryMock);
-
+    	Mockito.reset(postServiceMock);
+    	
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -70,9 +59,8 @@ public class MainControllerTest {
 
     @Test
     public void testRootContext() throws Exception {
-        when(postRepositoryMock.findAll(any(PageRequest.class)))
-                .thenReturn((new PageImpl<Post>(getDummyPosts())));
-        when(postRepositoryMock.findAll()).thenReturn(getDummyPosts());
+        when(postServiceMock.getAll())
+                .thenReturn(getDummyPosts());
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk());

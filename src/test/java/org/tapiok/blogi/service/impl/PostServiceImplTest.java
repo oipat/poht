@@ -7,6 +7,7 @@
 package org.tapiok.blogi.service.impl;
 
 import org.junit.Assert;
+
 import static org.mockito.Mockito.*;
 
 import org.junit.Test;
@@ -20,12 +21,9 @@ import org.tapiok.blogi.model.Post;
 import org.tapiok.blogi.repo.CommentRepository;
 import org.tapiok.blogi.repo.PostRepository;
 import org.tapiok.blogi.service.PostService;
+import org.tapiok.blogi.service.PostServiceImpl;
 import org.tapiok.blogi.util.TestUtil;
 
-/**
- *
- * @author Tapio
- */
 
 public class PostServiceImplTest {
     
@@ -48,7 +46,7 @@ public class PostServiceImplTest {
     @Test
     public void testAddPost() {
         Post testPost = TestUtil.getDummyPosts().get(0);
-        when(postRepository.save(any(Post.class)))
+        when(postRepository.saveAndFlush(any(Post.class)))
                 // return same Post instance as the given argument
                 .thenAnswer(new Answer<Post>() {
                     @Override
@@ -58,7 +56,8 @@ public class PostServiceImplTest {
                     }
                 });
         
-        Post returnedPost = postService.addPost(testPost);
+        Post returnedPost = postService.savePost(testPost);
+        verify(postRepository, times(1)).saveAndFlush(any(Post.class));
         Assert.assertNotNull(returnedPost);
         Assert.assertEquals(testPost, returnedPost);
     }

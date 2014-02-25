@@ -9,14 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-/**
- *
- * @author Tapio
- */
+
 @Entity
 public class UserEntity implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = 7873228695885631320L;
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(mappedBy = "userEntity", cascade = {CascadeType.ALL})
