@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public List<String> getRoles(Integer role) {
-        List<String> roles = new ArrayList<>();
+        List<String> roles = new ArrayList<String>();
         if (role.intValue() == 1) {
             roles.add("ROLE_USER");
         }
@@ -54,7 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public static List<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }

@@ -15,5 +15,5 @@ import org.springframework.context.annotation.Import;
 @Import(value = {PersistenceConfig.class})
 @ComponentScan(basePackages = "org.tapiok.blogi.service")
 public class RootConfig {
-    
+	
 }
