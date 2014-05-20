@@ -16,7 +16,7 @@ import org.tapiok.blogi.model.UserEntity;
 import org.tapiok.blogi.repo.UserRepository;
 
 
-@Service
+//@Service
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
