@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -42,8 +43,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     
     @Bean
     public HandlerExceptionResolver exceptionResolver() {
-    	SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
-    	exceptionResolver.setDefaultErrorView("error/error");
+    	ResponseStatusExceptionResolver exceptionResolver = new ResponseStatusExceptionResolver();
     	return exceptionResolver;
     }
 

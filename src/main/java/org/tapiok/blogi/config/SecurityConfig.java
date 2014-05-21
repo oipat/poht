@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        /*http.authorizeRequests()
                 .antMatchers("/postform/**", "/postDelete/**", "/commentDelete/**").hasRole("USER")
                 .antMatchers("PUT", "/**").hasRole("USER")
                 .antMatchers("POST", "/**").hasRole("USER")
@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 //.logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll();*/
+    	http.csrf().disable();
     }
 
     @Override
