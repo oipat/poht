@@ -23,23 +23,23 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view="">
+  <div class="container">
 
-	<div id="top">
-		<form>
-			<input type="text" name="username" />
-			<input type="password" name="password" />
-		  <button id="login-submit">Login</button>
-		</form>
-	</div>
-	<div id="main" ng-controller="MainController">
-		<div ng-repeat="blogPost in blogPostList">
-			<h1>{{blogPost.title}}</h1>
-			<div>{{blogPost.body}}</div>
-		</div>
-	</div>
-
+    <div id="top">
+      <div id="nav">
+        <a href="/#/front/">Frontpage</a>
+        <a href="/#/post/">Post</a>
+      </div>
+    	<form>
+    		<input type="text" name="username" />
+    		<input type="password" name="password" />
+    	  <button id="login-submit">Login</button>
+    	</form>
     </div>
+    <div id="main" ng-view>
+    </div>
+
+  </div>
 
 
     <!--[if lt IE 9]>
@@ -57,8 +57,9 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/services/main.js"></script>
+        <script src="scripts/controllers/frontpage.js"></script>
+        <script src="scripts/controllers/post.js"></script>
+        <script src="scripts/services/blogService.js"></script>
         <!-- endbuild -->
 </body>
 </html>
