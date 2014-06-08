@@ -3,7 +3,9 @@ dist
 .tmp
 .sass-cache
 frontend/app/bower_components
+frontend/node_modules
 target
 .classpath
 .project
 .settings
+phantomjsdriver.log

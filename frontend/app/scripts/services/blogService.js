@@ -1,12 +1,14 @@
-angular.module("BlogiApp.services", ['ngResource']).
+'use strict';
+
+angular.module('BlogiApp.services', ['ngResource']).
 	factory('BlogiApi', function($resource) {
 
 		var Post = $resource('http://localhost:8080/blogi/posts/');
 		var blogiApi = {};
 
 		blogiApi.listBlogPosts = function() {
-			return Post.query();
-		}
+			return Post.query().$promise;
+		};
 
 		blogiApi.createPost = function(postData) {
 			var postResource = new Post();
@@ -15,7 +17,7 @@ angular.module("BlogiApp.services", ['ngResource']).
 			postResource.title = postData.subject;
 			postResource.body = postData.body;
 			return postResource.$save();
-		}
+		};
 
 		return blogiApi;
 	});

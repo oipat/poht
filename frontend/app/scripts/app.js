@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('BlogiApp', [
 	'ngRoute',
 	'BlogiApp.controllers',
@@ -17,4 +19,5 @@ angular.module('BlogiApp', [
 			.otherwise({
 				redirectTo: '/front'
 			});
-}]);
+  }
+]);
