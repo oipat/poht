@@ -28,7 +28,7 @@ describe('Postingpage', function() {
 		postPage.verify();
 		postPage.submitPost('subject', 'body');
 		postPage.clickLink('Frontpage');
-		expect(element(by.xpath('//div[contains(@class, "post")]/h1[contains(text(), "subject")]'))
+		expect(element(by.xpath('//div[contains(@class, "post")]/a/h1[contains(text(), "subject")]'))
 			.isDisplayed()).toBeTruthy();
 	});
 });
