@@ -37,6 +37,18 @@ public class JsonPostRestController {
 		return new ResponseEntity<Post>(postService.savePost(post), HttpStatus.CREATED);
     }
     
+    @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Post> getPost(@PathVariable Long id) {
+    	Post findPost = postService.findById(id);
+    	if(findPost == null) {
+    		return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
+    	}
+    	else {
+        	return new ResponseEntity<Post>(findPost, HttpStatus.OK);
+    	}
+    }
+    
     @RequestMapping(value = "/posts/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Post> putPost(@Valid @RequestBody Post post, @PathVariable Long id) {

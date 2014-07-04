@@ -1,5 +1,8 @@
 'use strict';
 
+(function(){
+
+// Module definitions
 angular.module('BlogiApp', [
 	'ngRoute',
 	'BlogiApp.controllers',
@@ -12,7 +15,11 @@ angular.module('BlogiApp', [
 				templateUrl: 'views/frontpage.html',
 				controller: 'FrontPageController'
 			})
-			.when('/post', {
+			.when('/newpostform', {
+				templateUrl: 'views/newpostform.html',
+				controller: 'NewPostFormController'
+			})
+			.when('/post/:postId', {
 				templateUrl: 'views/post.html',
 				controller: 'PostController'
 			})
@@ -21,3 +28,8 @@ angular.module('BlogiApp', [
 			});
   }
 ]);
+
+// Module injections
+angular.module('BlogiApp.controllers', ['BlogiApp.services'])
+
+})();

@@ -1,0 +1,7 @@
+<div id="post" ng-controller="NewPostFormController">
+  <form>
+    <input type="text" name="subject" ng-model="postmodel.subject" />
+    <textarea name="body" ng-model="postmodel.body"></textarea>
+    <button name="submit" ng-click="createPost()">Submit</button>
+  </form>
+</div>

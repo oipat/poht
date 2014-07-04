@@ -1,11 +1,34 @@
 'use strict'
 
+var frontPage;
+var postPage;
 
-describe('BlogiApp', function () {
+beforeEach(function() {
+	frontPage = require('./page/FrontPage.js');
+	postPage = require('./page/PostPage.js')
+});
 
-	 it('should have visible login button', function() {
+describe('Frontpage', function () {
+
+	it('should have visible login button', function() {
 		browser.get('/');
-		expect(element(by.xpath('//button[@id="login-submit"]')).isDisplayed())
-			.toBeTruthy();
-	 });
+		frontPage.verify();
+	});
+
+});
+
+describe('Postingpage', function() {
+	beforeEach(function() {
+		browser.get('/');
+		frontPage.verify();
+	});
+
+	it('should be able to post a new post', function() {
+		frontPage.clickLink('Post');
+		postPage.verify();
+		postPage.submitPost('subject', 'body');
+		postPage.clickLink('Frontpage');
+		expect(element(by.xpath('//div[contains(@class, "post")]/h1[contains(text(), "subject")]'))
+			.isDisplayed()).toBeTruthy();
+	});
 });

@@ -1,6 +1,7 @@
 'use strict';
+(function(){
 
-angular.module('BlogiApp.controllers', ['BlogiApp.services']).
+angular.module('BlogiApp.controllers').
 controller('FrontPageController', function($scope, BlogiApi) {
 
 	BlogiApi.listBlogPosts().then(function(data) {
@@ -8,3 +9,5 @@ controller('FrontPageController', function($scope, BlogiApi) {
 		$scope.blogPostList = data;
 	});
 });
+
+})();
