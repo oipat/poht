@@ -5,53 +5,47 @@
 package org.tapiok.blogi.controller;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.tapiok.blogi.config.TestContext;
 import org.tapiok.blogi.model.Post;
 import org.tapiok.blogi.service.PostService;
 import org.tapiok.blogi.util.TestUtil;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestContext.class})
-@WebAppConfiguration
 public class JsonPostRestControllerTest {
 
     private MockMvc mockMvc;
     
-    @Autowired
+    @Mock
     private PostService postServiceMock;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
     
+    JsonPostRestController jsonPostRestController;
+
     private static final Logger logger = LoggerFactory.getLogger(JsonPostRestControllerTest.class);
 
     @Before
     public void setUp() {
-        Mockito.reset(postServiceMock);
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    	MockitoAnnotations.initMocks(this);
+        jsonPostRestController = new JsonPostRestController(postServiceMock);
+        mockMvc = MockMvcBuilders.standaloneSetup(jsonPostRestController).build();
     }
 
     @Test

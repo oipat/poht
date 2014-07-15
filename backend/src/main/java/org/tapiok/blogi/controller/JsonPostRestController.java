@@ -21,10 +21,14 @@ import org.tapiok.blogi.service.PostService;
 @Controller
 public class JsonPostRestController {
     
-    @Autowired
     PostService postService;
-    
-    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+
+    @Autowired
+    public JsonPostRestController(PostService postService) {
+    	this.postService = postService;
+	}
+
+	@RequestMapping(value = "/posts", method = RequestMethod.GET)
     @ResponseBody
     public List<Post> getAllPosts() {
         List<Post> posts = postService.getAll();

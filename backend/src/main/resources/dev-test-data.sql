@@ -1,0 +1,2 @@
+INSERT INTO `USER_ROLE` VALUES (1,1,1);
+INSERT INTO `USER_ENTITY` VALUES (1,'Ismo','$2a$10$DUPVOOoWl6MIy9nj93b6Ku7mnvfXde/Is7uJTSQlcoeqiGg0pktQK','Laitela','ismo');
