@@ -1,4 +1,8 @@
 <div id="view-post" ng-controller="PostController">
     <h1>{{blogPost.title}}</h1>
     <div>{{blogPost.body}}</div>
+    <div ng-repeat="comment in blogPost.comments" class="view-post-comments">
+      <h2>{{comment.author}}</h2>
+      <div>{{comment.body}}</div>
+    </div>
 </div>

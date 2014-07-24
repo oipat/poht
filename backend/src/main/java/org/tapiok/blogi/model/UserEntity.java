@@ -22,6 +22,7 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(mappedBy = "userEntity", cascade = {CascadeType.ALL})
+    @JsonIgnore
     private UserRole userRole;
     @Column(name = "firstName")
     String firstName;

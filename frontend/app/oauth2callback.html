@@ -1,0 +1,15 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript">
+      window.onload = function(e) {
+        window.opener.oauth2return = window.location.href;
+        window.opener.refreshLogin();
+        window.close();
+      }
+    </script>
+  </head>
+  <body ng-app="BlogiApp">
+</body>
+</html>

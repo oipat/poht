@@ -16,6 +16,58 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script type="text/javascript">
+        var googleLogin = function() {
+          var url = "https://accounts.google.com/o/oauth2/auth?";
+          url += "scope=email%20openid";
+          url += "&state=%2Fprofile";
+          url += "&redirect_uri=http://localhost:9000/oauth2callback.html";
+          url += "&response_type=code";
+          url += "&client_id=536433963598-mbst2iuhdm4ufjnkb6poodgg72g00voe.apps.googleusercontent.com";
+          var openedWindow = window.open(url,'name','toolbar=1,scrollbars=1,location=1,statusbar=0,menubar=1,resizable=1,width=800,height=600');
+        };
+        var refreshLogin = function() {
+          if(oauth2return === undefined) {
+            console.log(oauth2return);
+            document.getElementById("login-form").innerHtml = "\
+              <input type=\"text\" name=\"username\" />\
+              <input type=\"password\" name=\"password\" />\
+              <button id=\"login-submit\">Login</button>\
+              <button onclick=\"googleLogin()\">Login</button>\
+              <button onclick=\"alert(oauth2return)\">Test</button>";
+          }
+          else if(oauth2return !== undefined) {
+            console.log(oauth2return);
+            document.getElementById("login-form").innerHTML = "\
+              <input type=\"text\" name=\"username\" />\
+              <input type=\"password\" name=\"password\" />\
+              <button id=\"login-submit\">Login</button>\
+              <button onclick=\"googleLogin()\">Login</button>" + oauth2return;
+
+              var authzCode = oauth2return.split("?")[1].split("&")[1].split("=")[1];
+              console.log("authzCode: " + authzCode);
+
+              var http = new XMLHttpRequest();
+              var url = "https://accounts.google.com/o/oauth2/token";
+              var params = "code=" + authzCode;
+              params += "&client_id=536433963598-mbst2iuhdm4ufjnkb6poodgg72g00voe.apps.googleusercontent.com";
+              params += "&client_secret=7XM3uKbAJBhxuEq4MX7SDSXO";
+              params += "&redirect_uri=http://localhost:9000/oauth2callback.html";
+              params += "&grant_type=authorization_code";
+              http.open("POST", url, true);
+
+              //Send the proper header information along with the request
+              http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+              http.onreadystatechange = function() {//Call a function when the state changes.
+                  if(http.readyState == 4 && http.status == 200) {
+                      console.log(http.responseText);
+                  }
+              }
+              http.send(params);
+          }
+        };
+    </script>
   </head>
   <body ng-app="BlogiApp">
     <!--[if lt IE 7]>
@@ -30,10 +82,12 @@
         <a href="/#/front/">Frontpage</a>
         <a href="/#/newpostform/">Post</a>
       </div>
-    	<form>
+    	<form id="login-form">
     		<input type="text" name="username" />
     		<input type="password" name="password" />
     	  <button id="login-submit">Login</button>
+        <button onclick="googleLogin()">Login</button>
+        <button onclick="alert(oauth2return)">Test</button>
     	</form>
     </div>
     <div id="main" ng-view>
