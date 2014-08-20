@@ -1,12 +1,9 @@
 package org.tapiok.blogi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,13 +12,10 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-public class Comment implements Serializable {
+public class Comment extends AbstractEntity implements Serializable {
     
 	private static final long serialVersionUID = 6132154323678280845L;
 	
-	@Id
-    @GeneratedValue
-    private Long id;
     @NotNull @Size(min=2, max=20)
     private String author;
     @NotNull @Size(min=2, max=2000)
@@ -35,14 +29,6 @@ public class Comment implements Serializable {
     @PrePersist
     private void onCreate() {
 	created = new Date();
-    }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getAuthor() {
@@ -71,7 +57,7 @@ public class Comment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comment {id=" + id + ", author=" + author
+		return "Comment {id=" + getId() + ", author=" + author
 				+ ", body=" + body + ", created=" + created + "}";
 	}
     

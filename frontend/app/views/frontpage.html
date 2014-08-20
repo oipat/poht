@@ -1,6 +1,6 @@
   <div id="front" ng-controller="FrontPageController">
     <div ng-repeat="blogPost in blogPostList" class="post">
-      <a href="/#/post/{{blogPost.id}}"><h1>{{blogPost.title}}</h1></a>
+      <a href="/#/post/{{blogPost.title | urlEncode}}"><h1>{{blogPost.title}}</h1></a>
       <div>{{blogPost.body}}</div>
     </div>
   </div>

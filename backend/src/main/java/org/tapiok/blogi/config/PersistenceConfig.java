@@ -35,15 +35,15 @@ public class PersistenceConfig {
         return transactionManager;
     }
 	
-	@Bean
-	@Profile("dev")
-	DatabasePopulator databasePopulator(DataSource dataSource)
-			throws ScriptException, SQLException {
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.setContinueOnError(true);
-		populator.setIgnoreFailedDrops(true);
-		populator.addScript(new ClassPathResource("dev-test-data.sql"));
-		populator.populate(dataSource.getConnection());
-		return populator;
-	}
+//	@Bean
+//	@Profile("dev")
+//	DatabasePopulator databasePopulator(DataSource dataSource)
+//			throws ScriptException, SQLException {
+//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//		populator.setContinueOnError(true);
+//		populator.setIgnoreFailedDrops(true);
+//		populator.addScript(new ClassPathResource("dev-test-data.sql"));
+//		populator.populate(dataSource.getConnection());
+//		return populator;
+//	}
 }

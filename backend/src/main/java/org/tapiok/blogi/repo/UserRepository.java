@@ -1,9 +1,10 @@
 package org.tapiok.blogi.repo;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.tapiok.blogi.model.UserEntity;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.tapiok.blogi.model.User;
 
-
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    UserEntity findByUsername(String username);
+@RepositoryRestResource(path = "users", itemResourceRel = "user", collectionResourceRel = "users")
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+   // User findByUsername(String username);
 }

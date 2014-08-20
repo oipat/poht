@@ -19,7 +19,7 @@ angular.module('BlogiApp', [
 				templateUrl: 'views/newpostform.html',
 				controller: 'NewPostFormController'
 			})
-			.when('/post/:postId', {
+			.when('/post/:postTitle', {
 				templateUrl: 'views/post.html',
 				controller: 'PostController'
 			})
@@ -27,7 +27,11 @@ angular.module('BlogiApp', [
 				redirectTo: '/front'
 			});
   }
-]);
+])
+
+.filter('urlEncode', function() {
+  return window.encodeURIComponent;
+});
 
 // Module injections
 angular.module('BlogiApp.controllers', ['BlogiApp.services'])

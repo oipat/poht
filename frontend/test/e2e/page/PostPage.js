@@ -9,7 +9,7 @@ var PostPage = function() {
   };
 
   this.submitPost = function(subject, body) {
-    element(by.name("subject")).sendKeys(subject);
+    element(by.name("title")).sendKeys(subject);
     element(by.name("body")).sendKeys(body);
     element(by.name("submit")).click();
   };

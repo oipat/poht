@@ -8,46 +8,32 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.UniqueConstraint;
 
 /**
  * 
  * @author Tapio
  */
+
 @Entity
-public class Post implements Serializable {
+public class Post extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = -2372401650838806205L;
-
-	@Id
-	@GeneratedValue
-	private Long id;
+	
 	@ManyToOne
-	private UserEntity author;
+	private User author;
+	
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	private List<Comment> comments;
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = false)
+	
 	private Date created;
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", nullable = false)
 	private Date updated;
-	@NotNull
-	@Size(min = 2, max = 20)
-	@Column(name = "title")
+	@Column(unique = true)
 	private String title;
-	@NotNull
-	@Size(min = 2, max = 20000)
-	@Column(name = "body", columnDefinition = "TEXT")
 	private String body;
 
 	@PrePersist
@@ -68,19 +54,11 @@ public class Post implements Serializable {
 		this.comments = comment;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public UserEntity getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(UserEntity author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -119,7 +97,7 @@ public class Post implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Post{" + "id=" + id + ", author=" + author + ", created="
+		sb.append("Post{" + ", user=" + author + ", created="
 				+ created + ", updated=" + updated + ", title=" + title
 				+ ", body=" + body + ", comments=[");
 		if (comments != null) {

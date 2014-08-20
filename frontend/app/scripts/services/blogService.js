@@ -1,27 +1,43 @@
 'use strict';
 
-angular.module('BlogiApp.services', ['ngResource']).
-	factory('BlogiApi', function($resource) {
+angular.module('BlogiApp.services', []).
+	factory('BlogiApi', function($http) {
 
-		var Post = $resource('http://localhost:8080/blogi/posts/:postId');
+		var apiRoot = "http://localhost:8080/blogi"
 		var blogiApi = {};
 
+
 		blogiApi.listBlogPosts = function() {
-			return Post.query().$promise;
+			var promise = $http({
+        method: 'GET',
+        url: apiRoot + '/posts'
+			}).then(function(response) {
+				return response.data._embedded.posts;
+			});
+			return promise;
 		};
 
 		blogiApi.createPost = function(postData) {
-			var postResource = new Post();
 			// TODO: change to real id when identity information is available.
-			postResource.author =
-					{id:1};
-			postResource.title = postData.subject;
-			postResource.body = postData.body;
-			return postResource.$save();
+			console.log(postData);
+			var promise = $http({
+				method: 'POST',
+				url: apiRoot + '/posts',
+				data: postData
+			}).then(function(response) {
+				//return response.data._embedded.posts;
+			});
+			return promise;
 		};
 
-		blogiApi.getPost = function(id) {
-			return Post.get({postId: id}).$promise;
+		blogiApi.getPostByTitle = function(title) {
+			var promise = $http({
+				method: 'GET',
+				url: apiRoot + '/posts/search/findByTitle?title=' + title
+			}).then(function(response) {
+				return response.data._embedded.posts[0];
+			});
+			return promise;
 		}
 
 		return blogiApi;

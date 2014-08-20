@@ -1,11 +1,16 @@
 package org.tapiok.blogi.repo;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.tapiok.blogi.model.Post;
 
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+@RepositoryRestResource(path = "posts", itemResourceRel = "post", collectionResourceRel = "posts")
+public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 
-    public Post findById(Long id);
+    List<Post> findByTitle(@Param("title") String title);
     
 }
